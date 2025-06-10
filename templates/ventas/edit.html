@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Ventas | Editar{% endblock %}
+{% set favicon = 'favicon/ventas.ico' %}
+
+{% block content %}
+<div class="d-flex justify-content-center my-5">
+  <div class="card shadow-sm p-4" style="max-width: 480px; width: 100%;">
+    <h3 class="mb-4 text-center">Actualizar Venta</h3>
+
+    <form action="{{ url_for('venta.edit', id=venta.id) }}" method="POST" novalidate>
+      <div class="mb-3">
+        <label for="cliente_id" class="form-label fw-semibold">Cliente</label>
+        <select name="cliente_id" id="cliente_id" class="form-select" required>
+          <option value="" disabled>Seleccione un cliente</option>
+          {% for cliente in clientes %}
+          <option value="{{ cliente.id }}" {% if cliente.id == venta.cliente_id %} selected {% endif %}>
+            {{ cliente.nombre }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="producto_id" class="form-label fw-semibold">Producto</label>
+        <select name="producto_id" id="producto_id" class="form-select" required>
+          <option value="" disabled>Seleccione un producto</option>
+          {% for producto in productos %}
+          <option value="{{ producto.id }}" {% if producto.id == venta.producto_id %} selected {% endif %}>
+            {{ producto.descripcion }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="cantidad" class="form-label fw-semibold">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad" name="cantidad" value="{{ venta.cantidad }}" min="1" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="fecha" class="form-label fw-semibold">Fecha</label>
+        <input type="date" class="form-control" id="fecha" name="fecha" value="{{ venta.fecha.strftime('%Y-%m-%d') }}" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 fw-semibold">
+        <i class="bi bi-save me-2"></i> Actualizar Venta
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Sistema de Ventas{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" 
+      crossorigin="anonymous"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link 
+      rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    >
+
+    <!-- Favicon dinámico por sección -->
+    {% if favicon %}
+      <link rel="icon" href="{{ url_for('static', filename=favicon) }}">
+    {% else %}
+      <link rel="icon" href="{{ url_for('static', filename='favicon/default.ico') }}">
+    {% endif %}
+
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .navbar-brand {
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+
+      .container {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+
+      table {
+        background-color: white;
+      }
+
+      th, td {
+        vertical-align: middle !important;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="#">VENTAS</a>
+        <button 
+          class="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav" 
+          aria-controls="navbarNav" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link {{ is_active('/usuarios/') }}" href="/usuarios/">
+                <i class="bi bi-person-circle me-1"></i>Usuarios
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ is_active('/clientes/') }}" href="/clientes/">
+                <i class="bi bi-people-fill me-1"></i>Clientes
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ is_active('/productos/') }}" href="/productos/">
+                <i class="bi bi-box-seam me-1"></i>Productos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ is_active('/ventas/') }}" href="/ventas/">
+                <i class="bi bi-cash-stack me-1"></i>Ventas
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="bi bi-box-arrow-right me-1"></i>Salir</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" 
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" 
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
